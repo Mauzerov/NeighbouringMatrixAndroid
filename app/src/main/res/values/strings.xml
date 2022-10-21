@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NeighbouringMatrix</string>
+    <string name="increase">Increase</string>
+    <string name="decrease">Decrease</string>
 </resources>

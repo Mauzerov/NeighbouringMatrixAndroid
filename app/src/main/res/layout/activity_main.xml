@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="com.mauzerov.neighbouringmatrix.InputConverter" />
         <variable
             name="viewModel"
             type="com.mauzerov.neighbouringmatrix.MainActivityViewModel" />
@@ -10,22 +11,23 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TableRow
-            android:layout_marginHorizontal="@dimen/table_row_horizonatal_margin"
-            >
-
+        <TableRow android:layout_marginHorizontal="@dimen/table_row_horizontal_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="i" />
+                android:layout_marginEnd="@dimen/table_row_horizontal_margin"
+                android:layout_weight="1"
+                android:text="i"
+                android:textSize="@dimen/table_row_text_size" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:text="@={InputConverter.intToString(viewModel.indexI)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -38,21 +40,128 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/imageButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@android:drawable/arrow_up_float" />
+                    android:onClickListener="@{(view) -> viewModel.setIndexI(viewModel.indexI + 1)}"
+                    app:srcCompat="@android:drawable/arrow_up_float"
+                    android:contentDescription="@string/increase" />
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@android:drawable/arrow_down_float" />
+                    android:onClickListener="@{(view) -> viewModel.setIndexI(viewModel.indexI - 1)}"
+                    app:srcCompat="@android:drawable/arrow_down_float"
+                    android:contentDescription="@string/decrease" />
             </LinearLayout>
         </TableRow>
+        <TableRow android:layout_marginHorizontal="@dimen/table_row_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/table_row_horizontal_margin"
+                android:layout_weight="1"
+                android:text="j"
+                android:textSize="@dimen/table_row_text_size" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="@={InputConverter.intToString(viewModel.indexJ)}"
+                android:inputType="number" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/arrow_up_float"
+                    android:onClickListener="@{(view) -> viewModel.setIndexJ(viewModel.indexJ + 1)}"
+                    android:contentDescription="@string/increase" />
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/arrow_down_float"
+                    android:onClickListener="@{(view) -> viewModel.setIndexJ(viewModel.indexJ - 1)}"
+                    android:contentDescription="@string/decrease" />
+            </LinearLayout>
+        </TableRow>
+
+        <Space android:layout_height="@dimen/table_row_horizontal_margin"/>
+
+        <TableRow android:layout_marginHorizontal="@dimen/table_row_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/table_row_horizontal_margin"
+                android:text="Wartość"
+                android:textSize="@dimen/table_row_text_size" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="@={InputConverter.booleanToString(viewModel.neighbouring)}"
+                android:inputType="number" />
+        </TableRow>
+
+        <Space android:layout_height="@dimen/table_row_horizontal_margin"/>
     </TableLayout>
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow android:layout_marginHorizontal="@dimen/table_row_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/table_row_horizontal_margin"
+                android:text="Start Node"
+                android:textSize="@dimen/table_row_text_size" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="@={InputConverter.intToString(viewModel.startNode)}"
+                android:inputType="number" />
+        </TableRow>
+        <TableRow android:layout_marginHorizontal="@dimen/table_row_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/table_row_horizontal_margin"
+                android:text="End Node"
+                android:textSize="@dimen/table_row_text_size" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="@={InputConverter.intToString(viewModel.endNode)}"
+                android:inputType="number" />
+        </TableRow>
+    </TableLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{InputConverter.listToString(viewModel.path)}"
+        />
 </LinearLayout>
 </layout>
