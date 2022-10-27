@@ -14,7 +14,7 @@ class MainActivityViewModel : BaseObservable() {
     private val matrix = Matrix(matrixSize)
 
     @get:Bindable
-    var neighbouring: Boolean
+    var neighbouring: Int
         get() = matrix[indexI, indexJ]
         set(value) {
             matrix[indexI, indexJ] = value
@@ -39,29 +39,24 @@ class MainActivityViewModel : BaseObservable() {
     var startNode = 0
         set(value) {
             field = value.coerceIn(0, matrixSize - 1)
-//            notifyPropertyChanged(BR.path)
+            notifyPropertyChanged(BR.path)
         }
 
     @Bindable
     var endNode = 0
         set(value) {
             field = value.coerceIn(0, matrixSize - 1)
-//            notifyPropertyChanged(BR.path)
+            notifyPropertyChanged(BR.path)
         }
 
-    private var pathCoroutine : Any? = null
     @get:Bindable
     val path: List<String>
     get() {
-            val path = matrix.findPath(startNode, endNode)
+            val path = matrix.findShortestPath(startNode, endNode)
             return if (path.isNotEmpty()) {
                 path.map { "($it)" }
             } else {
                 listOf("No path found")
             }
         }
-
-    fun log() {
-        Log.d("TAG", "log: $indexI $indexJ")
-    }
 }
