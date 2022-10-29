@@ -26,8 +26,10 @@ class Matrix(val size: Int) {
         }
         return neighbours
     }
-
+    @OptIn(ExperimentalStdlibApi::class)
     fun findShortestPath(startNode: Int, endNode: Int) : List<Int> {
+        if (startNode == endNode) return listOf()
+
         // Dijkstra's algorithm
         val distances = MutableList(size) { Int.MAX_VALUE }
         val previous = MutableList(size) { -1 }
@@ -38,6 +40,10 @@ class Matrix(val size: Int) {
         // While there are unvisited nodes
         // Find the closest unvisited node
         while (currentNode != endNode) {
+            // If all nodes are visited, but the endNode is not reached, return empty list
+            if (visited[currentNode])
+                return listOf()
+
             // Mark current node as visited
             visited[currentNode] = true
             // Get neighbours of current node
@@ -55,10 +61,10 @@ class Matrix(val size: Int) {
 
             // Find next node to visit
             // Set current node to the closest unvisited node
-            var minDistance = Int.MAX_VALUE
+            var closestDistance = Int.MAX_VALUE
             for (i in 0 until size) {
-                if (!visited[i] && distances[i] < minDistance) {
-                    minDistance = distances[i]
+                if (!visited[i] && distances[i] < closestDistance) {
+                    closestDistance = distances[i]
                     currentNode = i
                 }
             }

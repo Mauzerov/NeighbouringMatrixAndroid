@@ -3,20 +3,17 @@ package com.mauzerov.neighbouringmatrix
 import android.util.Log
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.runBlocking
 
 class MainActivityViewModel : BaseObservable() {
     private val matrixSize = 50
 
     private val matrix = Matrix(matrixSize)
 
+
     @get:Bindable
     var neighbouring: Int
-        get() = matrix[indexI, indexJ]
-        set(value) {
+    get() = matrix[indexI, indexJ]
+       set(value) {
             matrix[indexI, indexJ] = value
             notifyPropertyChanged(BR.path)
         }
@@ -39,14 +36,14 @@ class MainActivityViewModel : BaseObservable() {
     var startNode = 0
         set(value) {
             field = value.coerceIn(0, matrixSize - 1)
-            notifyPropertyChanged(BR.path)
+            notifyPropertyChanged(BR._all)
         }
 
     @Bindable
     var endNode = 0
         set(value) {
             field = value.coerceIn(0, matrixSize - 1)
-            notifyPropertyChanged(BR.path)
+            notifyPropertyChanged(BR._all)
         }
 
     @get:Bindable
