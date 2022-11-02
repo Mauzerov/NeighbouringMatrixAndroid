@@ -52,7 +52,6 @@ object DijkstraPathFinder: PathFinder {
             if (visited[currentNode]) {
                 break
             }
-
             visited[currentNode] = true
             // Get neighbours of current node
             val neighbours = getNeighbours(currentNode)

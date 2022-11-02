@@ -32,9 +32,4 @@ object IC {
     fun <T> listToString(value: List<T>): String {
         return value.joinToString(separator = ", ")
     }
-
-    @JvmStatic
-    fun nullableIntToString(value: Int?): String {
-        return value?.toString().orEmpty()
-    }
 }
