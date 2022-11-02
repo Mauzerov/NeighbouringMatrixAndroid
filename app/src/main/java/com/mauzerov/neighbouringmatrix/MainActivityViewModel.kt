@@ -7,7 +7,7 @@ import androidx.databinding.Bindable
 class MainActivityViewModel : BaseObservable() {
     private val matrixSize = 50
 
-    private val matrix = Matrix(matrixSize)
+    private val matrix = Matrix(matrixSize, DijkstraPathFinder)
 
 
     @get:Bindable
