@@ -3,16 +3,16 @@ package com.mauzerov.neighbouringmatrix
 import android.widget.EditText
 import androidx.databinding.InverseMethod
 
-object InputConverter {
+object IC {
     @InverseMethod("stringToInt")
     @JvmStatic
-    fun intToString(value: Int): String {
-        return value.toString()
+    fun intToString(value: Int?): String {
+        return value?.toString().orEmpty()
     }
 
     @JvmStatic
-    fun stringToInt(value: String): Int {
-        return value.toIntOrNull() ?: 0
+    fun stringToInt(value: String): Int? {
+        return value.toIntOrNull()
     }
 
     @InverseMethod("stringToBoolean")
@@ -25,9 +25,16 @@ object InputConverter {
     fun stringToBoolean(value: String): Boolean {
         return (value.toIntOrNull() ?: 0) != 0
     }
+    @JvmStatic
+    fun nullableToInt(v: Int?) : Int = v ?: 0
 
     @JvmStatic
     fun <T> listToString(value: List<T>): String {
         return value.joinToString(separator = ", ")
+    }
+
+    @JvmStatic
+    fun nullableIntToString(value: Int?): String {
+        return value?.toString().orEmpty()
     }
 }

@@ -49,6 +49,10 @@ object DijkstraPathFinder: PathFinder {
         // Find the closest unvisited node
         while (currentNode != endNode) {
             // Mark current node as visited
+            if (visited[currentNode]) {
+                break
+            }
+
             visited[currentNode] = true
             // Get neighbours of current node
             val neighbours = getNeighbours(currentNode)
@@ -56,7 +60,7 @@ object DijkstraPathFinder: PathFinder {
             // If the distance to the neighbour is shorter than the current distance
             // Update the distance and set the previous node
             for (neighbour in neighbours) {
-                val newDistance = distances[currentNode] + matrix[currentNode, neighbour]
+                val newDistance = distances[currentNode] + matrix[currentNode, neighbour]!!
                 if (newDistance < distances[neighbour]) {
                     distances[neighbour] = newDistance
                     previous[neighbour] = currentNode

@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.notifyPropertyChanged(BR._all)
-            binding.swipeRefresh.isRefreshing = false
-        }
+//        binding.swipeRefresh.setOnRefreshListener {
+//            viewModel.notifyPropertyChanged(BR._all)
+//            binding.swipeRefresh.isRefreshing = false
+//        }
     }
 }

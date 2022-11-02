@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="com.mauzerov.neighbouringmatrix.InputConverter" />
+        <import type="com.mauzerov.neighbouringmatrix.IC" />
         <variable
             name="viewModel"
             type="com.mauzerov.neighbouringmatrix.MainActivityViewModel" />
     </data>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     android:id="@+id/swipeRefresh"
+    app:onRefreshListener="@{() -> viewModel.refresh()}"
+    app:refreshing="@{viewModel.isLoading}"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -30,7 +32,7 @@
                     android:textSize="@dimen/table_row_text_size" />
 
                 <EditText
-                    android:text="@={InputConverter.intToString(viewModel.indexI)}"
+                    android:text="@={IC.intToString(viewModel.indexI)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -46,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setIndexI(viewModel.indexI + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexI(IC.nullableToInt(viewModel.indexI) + 1)}"
                         app:srcCompat="@android:drawable/arrow_up_float"
                         android:contentDescription="@string/increase" />
 
@@ -54,7 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setIndexI(viewModel.indexI - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexI(IC.nullableToInt(viewModel.indexI) - 1)}"
                         app:srcCompat="@android:drawable/arrow_down_float"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
@@ -74,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:text="@={InputConverter.intToString(viewModel.indexJ)}"
+                    android:text="@={IC.intToString(viewModel.indexJ)}"
                     android:inputType="number" />
 
                 <LinearLayout
@@ -87,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:srcCompat="@android:drawable/arrow_up_float"
-                        android:onClickListener="@{(view) -> viewModel.setIndexJ(viewModel.indexJ + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexJ(IC.nullableToInt(viewModel.indexJ) + 1)}"
                         android:contentDescription="@string/increase" />
 
                     <ImageButton
@@ -95,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:srcCompat="@android:drawable/arrow_down_float"
-                        android:onClickListener="@{(view) -> viewModel.setIndexJ(viewModel.indexJ - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexJ(IC.nullableToInt(viewModel.indexJ) - 1)}"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
             </TableRow>
@@ -116,7 +118,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:text="@={InputConverter.intToString(viewModel.neighbouring)}"
+                    android:enabled="@{viewModel.neighbouring != null}"
+                    android:text="@={IC.intToString(viewModel.neighbouring)}"
                     android:inputType="number" />
             </TableRow>
 
@@ -140,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:text="@={InputConverter.intToString(viewModel.startNode)}"
+                    android:text="@={IC.intToString(viewModel.startNode)}"
                     android:inputType="number" />
 
                 <LinearLayout
@@ -152,7 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setStartNode(viewModel.startNode + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setStartNode(IC.nullableToInt(viewModel.startNode) + 1)}"
                         app:srcCompat="@android:drawable/arrow_up_float"
                         android:contentDescription="@string/increase" />
 
@@ -160,7 +163,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setStartNode(viewModel.startNode - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setStartNode(IC.nullableToInt(viewModel.startNode) - 1)}"
                         app:srcCompat="@android:drawable/arrow_down_float"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
@@ -178,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:text="@={InputConverter.intToString(viewModel.endNode)}"
+                    android:text="@={IC.intToString(viewModel.endNode)}"
                     android:inputType="number" />
 
                 <LinearLayout
@@ -190,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setEndNode(viewModel.endNode + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setEndNode(IC.nullableToInt(viewModel.endNode) + 1)}"
                         app:srcCompat="@android:drawable/arrow_up_float"
                         android:contentDescription="@string/increase" />
 
@@ -198,7 +201,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setEndNode(viewModel.endNode - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setEndNode(IC.nullableToInt(viewModel.endNode) - 1)}"
                         app:srcCompat="@android:drawable/arrow_down_float"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
@@ -207,7 +210,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{InputConverter.listToString(viewModel.path)}"
+            android:text="@{IC.listToString(viewModel.path)}"
             />
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

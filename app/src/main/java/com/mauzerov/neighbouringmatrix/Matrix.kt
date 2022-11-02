@@ -14,8 +14,18 @@ class Matrix(val size: Int, private val finder: PathFinder) {
             matrix[x][y] = value
     }
 
-    operator fun get(row: Int, column: Int): Int {
+    operator fun get(row: Int, column: Int): Int? {
+        if (row == column)
+            return null
         return matrix[row][column]
+    }
+
+    operator fun get(row: Int?, column: Int?): Int? {
+        return row?.let { r ->
+            column?.let { c ->
+                this[r, c]
+            }
+        }
     }
 
     fun getNeighbours(node: Int): List<Int> {
@@ -28,7 +38,7 @@ class Matrix(val size: Int, private val finder: PathFinder) {
     }
 
     fun findShortestPath(startNode:Int, endNode: Int) : List<Int> =
-        finder(this, startNode, endNode)
+        if (startNode != endNode) finder(this, startNode, endNode) else listOf()
 /*
     fun findShortestPath(startNode: Int, endNode: Int) : List<Int> {
         // Dijkstra's algorithm
