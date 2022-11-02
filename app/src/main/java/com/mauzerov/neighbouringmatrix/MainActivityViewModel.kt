@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 class MainActivityViewModel : BaseObservable() {
     private val matrixSize = 50
 
-    private val matrix = Matrix(matrixSize)
+    private val matrix = Matrix(matrixSize, DijkstraPathFinder)
 
     @get:Bindable
     var neighbouring: Int

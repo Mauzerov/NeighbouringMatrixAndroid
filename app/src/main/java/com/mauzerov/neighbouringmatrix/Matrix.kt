@@ -1,6 +1,6 @@
 package com.mauzerov.neighbouringmatrix
 
-class Matrix(val size: Int) {
+class Matrix(val size: Int, private val finder: PathFinder) {
     // 2D array of Costs
     private val matrix: MutableList<MutableList<Int>> =
         MutableList(size) { MutableList(size) { 0 } }
@@ -18,7 +18,7 @@ class Matrix(val size: Int) {
         return matrix[row][column]
     }
 
-    private fun getNeighbours(node: Int): List<Int> {
+    fun getNeighbours(node: Int): List<Int> {
         val neighbours = mutableListOf<Int>()
         for (i in 0 until size) {
             if (matrix[node][i] != 0)
@@ -27,6 +27,9 @@ class Matrix(val size: Int) {
         return neighbours
     }
 
+    fun findShortestPath(startNode:Int, endNode: Int) : List<Int> =
+        finder(this, startNode, endNode)
+/*
     fun findShortestPath(startNode: Int, endNode: Int) : List<Int> {
         // Dijkstra's algorithm
         val distances = MutableList(size) { Int.MAX_VALUE }
@@ -104,4 +107,5 @@ class Matrix(val size: Int) {
 
         return path
     }
+ */
 }
