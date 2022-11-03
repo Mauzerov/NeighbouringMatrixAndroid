@@ -7,7 +7,7 @@ import com.mauzerov.neighbouringmatrix.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainActivityViewModel = MainActivityViewModel()
+    private val viewModel: MainActivityViewModel = MainActivityViewModel(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

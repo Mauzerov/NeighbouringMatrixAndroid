@@ -29,6 +29,12 @@ object IC {
     fun nullableToInt(v: Int?) : Int = v ?: 0
 
     @JvmStatic
+    fun <T> nullableToFallback(v: T?, fallback: T) : T = v ?: fallback
+
+    @JvmStatic
+    fun nullableToFallback(v: Int?) : Int = nullableToFallback<Int>(v, -1)
+
+    @JvmStatic
     fun <T> listToString(value: List<T>): String {
         return value.joinToString(separator = ", ")
     }

@@ -1,15 +1,16 @@
 package com.mauzerov.neighbouringmatrix
 
 interface PathFinder {
+    // Return a list of nodes making up the shortest path from startNode to endNode in the given matrix
+    // or an empty list if no path exists
     operator fun invoke(matrix: Matrix, startNode: Int, endNode: Int) : List<Int>
 }
 
 object DFSPathFinder : PathFinder {
-    override fun invoke(matrix: Matrix, startNode: Int, endNode: Int) : List<Int> =
-    with(matrix) {
+    override fun invoke(matrix: Matrix, startNode: Int, endNode: Int) : List<Int> = with(matrix) {
         val visited = MutableList(size) { false }
-        val stack = mutableListOf<Int>()
-        val path = mutableListOf<Int>()
+        val stack   = mutableListOf<Int>()
+        val path    = mutableListOf<Int>()
 
         stack.add(startNode)
 
@@ -24,10 +25,10 @@ object DFSPathFinder : PathFinder {
                 visited[current] = true
                 path.add(current)
 
-                val neighbours = getNeighbours(current)
-                for (neighbour in neighbours) {
-                    if (!visited[neighbour]) {
-                        stack.add(neighbour)
+                val connections = findConnectedNodes(current)
+                for (connection in connections) {
+                    if (!visited[connection]) {
+                        stack.add(connection)
                     }
                 }
             }
@@ -36,36 +37,33 @@ object DFSPathFinder : PathFinder {
     }
 }
 
+// Dijkstra's algorithm implementation
 object DijkstraPathFinder: PathFinder {
-    override fun invoke(matrix: Matrix, startNode: Int, endNode: Int): List<Int> =
-    with(matrix) {
+    override fun invoke(matrix: Matrix, startNode: Int, endNode: Int): List<Int> = with(matrix) {
         val distances = MutableList(size) { Int.MAX_VALUE }
-        val previous = MutableList(size) { -1 }
-        val visited = MutableList(size) { false }
+        val previous  = MutableList(size) { -1 }
+        val visited   = MutableList(size) { false }
         // Distance from startNode to startNode is 0
         distances[startNode] = 0
         var currentNode = startNode
         // While there are unvisited nodes
         // Find the closest unvisited node
         while (currentNode != endNode) {
+            if (visited[currentNode]) return listOf()
             // Mark current node as visited
-            if (visited[currentNode]) {
-                break
-            }
             visited[currentNode] = true
-            // Get neighbours of current node
-            val neighbours = getNeighbours(currentNode)
-            // Update distances to neighbours
-            // If the distance to the neighbour is shorter than the current distance
+            // Get connections of current node
+            val connections = findConnectedNodes(currentNode)
+            // Update distances to connection
+            // If the distance to the connection is shorter than the current distance
             // Update the distance and set the previous node
-            for (neighbour in neighbours) {
-                val newDistance = distances[currentNode] + matrix[currentNode, neighbour]!!
-                if (newDistance < distances[neighbour]) {
-                    distances[neighbour] = newDistance
-                    previous[neighbour] = currentNode
+            for (connection in connections) {
+                val newDistance = distances[currentNode] + matrix[currentNode, connection]!!
+                if (newDistance < distances[connection]) {
+                    distances[connection] = newDistance
+                    previous[connection] = currentNode
                 }
             }
-
             // Find next node to visit
             // Set current node to the closest unvisited node
             var minDistance = Int.MAX_VALUE

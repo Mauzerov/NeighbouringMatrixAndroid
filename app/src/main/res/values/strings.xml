@@ -2,4 +2,5 @@
     <string name="app_name">NeighbouringMatrix</string>
     <string name="increase">Increase</string>
     <string name="decrease">Decrease</string>
+    <string name="no_path">No path found</string>
 </resources>

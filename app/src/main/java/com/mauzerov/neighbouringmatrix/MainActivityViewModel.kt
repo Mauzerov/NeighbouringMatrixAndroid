@@ -1,68 +1,63 @@
 package com.mauzerov.neighbouringmatrix
 
-import android.util.Log
+import android.content.Context
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 
-class MainActivityViewModel : BaseObservable() {
+@OptIn(ExperimentalStdlibApi::class)
+class MainActivityViewModel(private val context: Context) : BaseObservable() {
     @get:Bindable val isLoading = false
 
     private val matrixSize = 50
-
     private val matrix = Matrix(matrixSize, DijkstraPathFinder)
 
-
-    @get:Bindable
+    @get:Bindable("indexI", "indexJ")
     var neighbouring: Int?
         get() = matrix[indexI, indexJ]
         set(value) {
-            indexI?.let { i ->
-                indexJ?.let { j ->
-                    matrix[i, j] = value ?: 0
-                    notifyPropertyChanged(BR.path)
-                }
-            }
+            matrix[indexI, indexJ] = value ?: 0
+            notifyPropertyChanged(BR.neighbouring)
         }
 
     @Bindable
-    var indexI: Int? = 0
+    var indexI: Int? = null
         set(value) {
-            field = value?.coerceIn(0, matrixSize - 1)
-            notifyPropertyChanged(BR._all)
+            field = value?.coerceIn(0..<matrixSize)
+            notifyPropertyChanged(BR.indexI)
         }
 
     @Bindable
-    var indexJ: Int? = 0
+    var indexJ: Int? = null
         set(value) {
-            field = value?.coerceIn(0, matrixSize - 1)
-            notifyPropertyChanged(BR._all)
+            field = value?.coerceIn(0..<matrixSize)
+            notifyPropertyChanged(BR.indexJ)
         }
 
     @Bindable
-    var startNode: Int? = 0
+    var startNode: Int? = null
         set(value) {
-            field = value?.coerceIn(0, matrixSize - 1)
-            notifyPropertyChanged(BR._all)
+            field = value?.coerceIn(0..<matrixSize)
+            notifyPropertyChanged(BR.startNode)
         }
 
     @Bindable
-    var endNode: Int? = 0
+    var endNode: Int? = null
         set(value) {
-            field = value?.coerceIn(0, matrixSize - 1)
-            notifyPropertyChanged(BR._all)
+            field = value?.coerceIn(0..<matrixSize)
+            notifyPropertyChanged(BR.endNode)
         }
 
-    @get:Bindable
+    @get:Bindable("indexI", "indexJ", "startNode", "endNode", "neighbouring")
     val path: List<String>
     get() {
             if (startNode == null || endNode == null)
-                return listOf("No path found")
+                return listOf(context.getString(R.string.no_path))
 
             val path = matrix.findShortestPath(startNode!!, endNode!!)
             return if (path.isNotEmpty()) {
                 path.map { "($it)" }
             } else {
-                listOf("No path found")
+                listOf(context.getString(R.string.no_path))
             }
         }
 

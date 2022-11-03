@@ -48,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setIndexI(IC.nullableToInt(viewModel.indexI) + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexI(IC.nullableToFallback(viewModel.indexI) + 1)}"
                         app:srcCompat="@android:drawable/arrow_up_float"
                         android:contentDescription="@string/increase" />
 
@@ -56,7 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setIndexI(IC.nullableToInt(viewModel.indexI) - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexI(IC.nullableToFallback(viewModel.indexI) - 1)}"
                         app:srcCompat="@android:drawable/arrow_down_float"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:srcCompat="@android:drawable/arrow_up_float"
-                        android:onClickListener="@{(view) -> viewModel.setIndexJ(IC.nullableToInt(viewModel.indexJ) + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexJ(IC.nullableToFallback(viewModel.indexJ) + 1)}"
                         android:contentDescription="@string/increase" />
 
                     <ImageButton
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:srcCompat="@android:drawable/arrow_down_float"
-                        android:onClickListener="@{(view) -> viewModel.setIndexJ(IC.nullableToInt(viewModel.indexJ) - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setIndexJ(IC.nullableToFallback(viewModel.indexJ) - 1)}"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
             </TableRow>
@@ -155,7 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setStartNode(IC.nullableToInt(viewModel.startNode) + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setStartNode(IC.nullableToFallback(viewModel.startNode) + 1)}"
                         app:srcCompat="@android:drawable/arrow_up_float"
                         android:contentDescription="@string/increase" />
 
@@ -163,7 +163,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setStartNode(IC.nullableToInt(viewModel.startNode) - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setStartNode(IC.nullableToFallback(viewModel.startNode) - 1)}"
                         app:srcCompat="@android:drawable/arrow_down_float"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
@@ -193,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setEndNode(IC.nullableToInt(viewModel.endNode) + 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setEndNode(IC.nullableToFallback(viewModel.endNode) + 1)}"
                         app:srcCompat="@android:drawable/arrow_up_float"
                         android:contentDescription="@string/increase" />
 
@@ -201,7 +201,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClickListener="@{(view) -> viewModel.setEndNode(IC.nullableToInt(viewModel.endNode) - 1)}"
+                        android:onClickListener="@{(view) -> viewModel.setEndNode(IC.nullableToFallback(viewModel.endNode) - 1)}"
                         app:srcCompat="@android:drawable/arrow_down_float"
                         android:contentDescription="@string/decrease" />
                 </LinearLayout>
