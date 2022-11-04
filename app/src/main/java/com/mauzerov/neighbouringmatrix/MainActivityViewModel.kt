@@ -8,8 +8,10 @@ import androidx.databinding.Bindable
 class MainActivityViewModel(private val context: Context) : BaseObservable() {
     @get:Bindable val isLoading = false
 
-    private val matrixSize = 50
-    private val matrix = Matrix(matrixSize, DijkstraPathFinder)
+    private val matrix = Matrix(50, DijkstraPathFinder)
+
+    private val matrixSize: Int
+        get() = matrix.size
 
     @get:Bindable("indexI", "indexJ")
     var neighbouring: Int?

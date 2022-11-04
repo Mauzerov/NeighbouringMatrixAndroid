@@ -14,9 +14,8 @@ class Matrix(val size: Int, private val finder: PathFinder) {
     }
     operator fun set(x: Int?, y: Int?, value: Int) {
         if (x == null || y == null) return
-        matrix[x][y] = value
+        this[x, y] = value
     }
-
 
     operator fun get(row: Int, column: Int): Int? {
         if (row == column)

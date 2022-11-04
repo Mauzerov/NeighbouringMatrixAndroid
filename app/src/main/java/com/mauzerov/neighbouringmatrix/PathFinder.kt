@@ -58,7 +58,7 @@ object DijkstraPathFinder: PathFinder {
             // If the distance to the connection is shorter than the current distance
             // Update the distance and set the previous node
             for (connection in connections) {
-                val newDistance = distances[currentNode] + matrix[currentNode, connection]!!
+                val newDistance = distances[currentNode] + this[currentNode, connection]!!
                 if (newDistance < distances[connection]) {
                     distances[connection] = newDistance
                     previous[connection] = currentNode
@@ -85,5 +85,4 @@ object DijkstraPathFinder: PathFinder {
         }
         return path.reversed()
     }
-
 }
