@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 if (propertyId != BR.neighbouring && propertyId != BR._all)
                     return@onPropertyChanged
                 viewer.replayGraph(viewModel.generateGraph())
+                viewer.getView(AndroidViewer.DEFAULT_VIEW_ID).camera.resetView()
             }
         })
 

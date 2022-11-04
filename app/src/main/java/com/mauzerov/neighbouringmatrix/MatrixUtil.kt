@@ -9,6 +9,7 @@ fun Matrix.generateGraph(): Graph {
 
     graph.isStrict = false
     // TODO: Improve rendering style
+    // TODO: Access themes.xml And Set Background acordingly
 
     graph.setAttribute("ui.stylesheet",
         "edge {size:20px; arrow-shape: arrow; arrow-size: 70px, 40px; shape: line;} \n" +
