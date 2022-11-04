@@ -1,9 +1,15 @@
 package com.mauzerov.neighbouringmatrix
 
 class Matrix(val size: Int, private val finder: PathFinder) {
+    val used = MutableList(size) { false }
+
     // 2D array of Costs
     private val matrix: MutableList<MutableList<Int>> =
         MutableList(size) { MutableList(size) { 0 } }
+
+    fun isUsed(node: Int): Boolean {
+        return matrix[node].any { it != 0 } || matrix.any { it[node] != 0 }
+    }
 
     init {
 
@@ -11,10 +17,12 @@ class Matrix(val size: Int, private val finder: PathFinder) {
 
     operator fun set(x: Int, y: Int, value: Int) {
         if (x != y) matrix[x][y] = value
+        used[x] = value != 0
+        used[y] = value != 0
     }
     operator fun set(x: Int?, y: Int?, value: Int) {
         if (x == null || y == null) return
-        matrix[x][y] = value
+        this[x, y] = value
     }
 
 

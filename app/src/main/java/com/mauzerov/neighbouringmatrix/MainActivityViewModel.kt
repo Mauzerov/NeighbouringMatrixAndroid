@@ -3,6 +3,7 @@ package com.mauzerov.neighbouringmatrix
 import android.content.Context
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import org.graphstream.graph.Graph
 
 @OptIn(ExperimentalStdlibApi::class)
 class MainActivityViewModel(private val context: Context) : BaseObservable() {
@@ -10,6 +11,10 @@ class MainActivityViewModel(private val context: Context) : BaseObservable() {
 
     private val matrixSize = 50
     private val matrix = Matrix(matrixSize, DijkstraPathFinder)
+
+    fun generateGraph() : Graph {
+        return matrix.generateGraph()
+    }
 
     @get:Bindable("indexI", "indexJ")
     var neighbouring: Int?

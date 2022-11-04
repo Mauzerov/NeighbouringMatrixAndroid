@@ -212,6 +212,10 @@
             android:layout_height="wrap_content"
             android:text="@{IC.listToString(viewModel.path)}"
             />
+        <FrameLayout
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
