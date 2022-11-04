@@ -5,10 +5,6 @@ class Matrix(val size: Int, private val finder: PathFinder) {
     private val matrix: MutableList<MutableList<Int>> =
         MutableList(size) { MutableList(size) { 0 } }
 
-    init {
-
-    }
-
     operator fun set(x: Int, y: Int, value: Int) {
         if (x != y) matrix[x][y] = value
     }

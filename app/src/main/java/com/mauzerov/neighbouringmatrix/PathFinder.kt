@@ -61,7 +61,7 @@ object DijkstraPathFinder: PathFinder {
                 val newDistance = distances[currentNode] + this[currentNode, connection]!!
                 if (newDistance < distances[connection]) {
                     distances[connection] = newDistance
-                    previous[connection] = currentNode
+                    previous[connection]  = currentNode
                 }
             }
             // Find next node to visit
