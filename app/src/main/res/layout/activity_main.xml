@@ -4,9 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="com.mauzerov.neighbouringmatrix.IC" />
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.mauzerov.neighbouringmatrix.MainActivityViewModel" />
+        <variable
+            name="isGraphLoaded"
+            type="Boolean" />
     </data>
 <!--<androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
 <!--    android:id="@+id/swipeRefresh"-->
@@ -212,7 +216,9 @@
             android:layout_height="wrap_content"
             android:text="@{IC.listToString(viewModel.path)}"
             />
+
         <FrameLayout
+            android:visibility="gone"
             android:id="@+id/placeholder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

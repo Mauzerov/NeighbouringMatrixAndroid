@@ -17,12 +17,8 @@ fun Matrix.generateGraph(): Graph {
 //        "node, edge, graph, sprite {  text-size: 20px; text-color: #ffffff; text-alignment: under; text-background-mode: rounded-box; text-background-color: #000000; text-padding: 5px, 5px; }"
     )
 
-//    graph.setAttribute("ui.quality")
-//    graph.setAttribute("ui.antialias")
-//    graph.setAttribute("ui.screenshot", "graph.png")
-
     for (i in 0 until size) {
-        if (!used[i]) continue;
+        if (!used[i]) continue
         graph.addNode(i.toString())
             .setAttribute("ui.label", i.toString())
     }

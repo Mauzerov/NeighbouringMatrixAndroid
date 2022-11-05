@@ -21,6 +21,8 @@ class MainActivityViewModel(private val context: Context) : BaseObservable() {
         get() = matrix[indexI, indexJ]
         set(value) {
             if (value == null) return
+            if (matrix[indexI, indexJ] == value) return
+
             matrix[indexI, indexJ] = value
             notifyPropertyChanged(BR.neighbouring)
         }
